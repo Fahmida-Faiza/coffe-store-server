@@ -34,7 +34,7 @@ async function run() {
     //mongodb
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
     // auth
-    const userCollection = client.db("cofeeDB").collection("user");
+    const userCollection = client.db("coffeeDB").collection("user");
 
     //get
     app.get("/coffee", async (req, res) => {
@@ -58,7 +58,17 @@ async function run() {
       res.send(result);
     });
 
-    //user related post
+    //user related post apis
+
+//get all
+ app.get("/user", async (req, res) => {
+   const cursor = userCollection.find();
+   const users = await cursor.toArray();
+   res.send(users);
+ });
+
+
+
     //post//create
     app.post("/user", async (req, res) => {
       const user = req.body;
@@ -117,7 +127,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) =>{
-    res.send('coffe making server is rumnning')
+    res.send('coffe making server is running')
 })
 app.listen(port, () =>{
     console.log(`coffe server is running port : ${port}`)

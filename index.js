@@ -66,7 +66,13 @@ async function run() {
    const users = await cursor.toArray();
    res.send(users);
  });
-
+//delete one id
+    app.delete("/user/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+    });
 
 
     //post//create
